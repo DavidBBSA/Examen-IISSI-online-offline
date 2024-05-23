@@ -30,7 +30,7 @@ const checkOrdersHasDeliveredAt = async (req, res, next) => {
     const numberOrdersDeliveredAtNull = await Order.findOne({
       where: { restaurantId: req.params.restaurantId, deliveredAt: null }
     })
-    if (numberOrdersDeliveredAtNull) {
+    if (!numberOrdersDeliveredAtNull) {
       return next()
     }
     return res.status(409).send('Forbidden')
